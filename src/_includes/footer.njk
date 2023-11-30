@@ -1,0 +1,26 @@
+<footer class="w-full py-4 text-lg bg-primary-100">
+  <div class="w-full text-center py-2">
+    <a class="w-auto p-3 text-base font-normal tracking-widest text-center uppercase text-primary-700 hover:underline md:py-0" href="/contact">
+      Contact Sarah
+    </a>
+  </div>
+  <div class="w-full text-center py-2">
+    {% for item in site.social %}
+      <a href="{{ item.url }}" class="inline-block px-2" target="_blank" rel="noopener noreferrer nofollow">
+        <svg width="24px" height="24px">
+          <use xlink:href="{{ item.image }}"></use>
+        </svg>
+        <span class="sr-only">{{ item.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</footer>
+<div class="w-full bg-stone-800 py-5">
+  <div class="w-full m-auto px-4 md:px-0">
+    <div class="text-center mb-4">
+      <p class="text-sm text-gray-100">
+        Copyright &copy; {{ site.author }}, <span x-data x-text="new Date().getFullYear()"></span>
+      </p>
+    </div>
+  </div>
+</div>

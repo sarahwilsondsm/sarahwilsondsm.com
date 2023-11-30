@@ -1,0 +1,9 @@
+.DS_Store
+.github/
+\_site/
+node_modules/
+package-lock.json
+README.md
+\_11ty/
+test/
+public/

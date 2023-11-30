@@ -1,0 +1,16 @@
+{
+    "title": "Sarah Wilson - Des Moines, IA",
+    "description": "",
+    "author": "Sarah Wilson DSM",
+    "favicon": "/img/favicon.ico",
+    "image": "/img/logo.png",
+    "language": "en",
+    "social": [
+      {
+        "title": "Facebook",
+        "url": "https://www.facebook.com/HSWilsonPhotography",
+        "image": "#facebook-unauth-icon"
+      }
+    ]
+  }
+  

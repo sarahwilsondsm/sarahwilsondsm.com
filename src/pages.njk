@@ -1,0 +1,12 @@
+---
+pagination:
+    data: contentful.pages
+    size: 1
+    alias: pg
+    addAllPagesToCollections: true
+permalink: "/{{ pg.slug | slug if pg.slug else pg.title | slugify }}"
+layout: page.njk
+eleventyComputed:
+  title: "{{ pg.title }}"
+---
+<h1>{{ pg.title }}</h1>
