@@ -4,7 +4,7 @@ pagination:
     size: 1
     alias: pg
     addAllPagesToCollections: true
-permalink: "/{{ pg.slug | slug if pg.slug else pg.title | slugify }}"
+permalink: "/{{ pg.slug | slugify if pg.slug else pg.title | slugify }}.html"
 layout: page.njk
 eleventyComputed:
   title: "{{ pg.title }}"
