@@ -1,5 +1,5 @@
 <nav id="header"
-  class="flex flex-col items-center w-full px-4 sm:h-16 bg-white shadow-none md:justify-between md:flex-row sm:px-6 sm:shadow py-2 sm:py-0">
+  class="flex flex-col items-center w-full px-4 sm:h-16 bg-white shadow-none md:justify-between md:flex-row sm:px-6 py-2 sm:py-0">
   <div id="menuHeader"
     class="flex flex-row flex-no-wrap items-center self-start justify-between w-full sm:w-auto sm:self-center sm:flex-none">
     <div class="do-not-delete"></div>
@@ -15,8 +15,8 @@
   <div id="menu"
     class="fixed inset-0 flex-col items-center self-end justify-center hidden h-full py-6 sm:relative sm:w-auto sm:self-center sm:flex sm:flex-row sm:py-0 bg-white/95">
     <a class="nav" href="/">Home</a>
-    {% for page in contentful.pages %}
-      <a class="nav" href="{{ page.slug | url if page.slug else page.title | slugify }}">{{ page.title }}</a></li>
+    {% for link in contentful.menulinks %}
+      <a class="nav" href="{{ link | slugify }}">{{ link }}</a></li>
     {% endfor %}
   </div>
   <div></div>

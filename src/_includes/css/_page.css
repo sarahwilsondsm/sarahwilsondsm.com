@@ -1,0 +1,152 @@
+@import './custom.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl sm:text-3xl font-bold font-serif mt-5 mb-3;
+  }
+  h2 {
+    @apply text-2xl font-bold font-sans mt-5 mb-3;
+  }
+  h3 {
+    @apply text-xl mt-5 mb-3;
+  }
+  h4 {
+    @apply text-base font-semibold mt-5 mb-3;
+  }
+  h5 {
+    @apply text-base font-medium italic mt-3 mb-1;
+  }
+  a {
+    @apply cursor-pointer hover:underline;
+  }
+  input {
+    @apply text-color-default;
+  }
+  textarea {
+    @apply text-color-default;
+  }
+}
+
+@layer components {
+  header {
+    @apply w-full flex flex-col overflow-hidden;
+  }
+
+  a.nav {
+    @apply w-auto px-3 py-3 sm:text-sm md:text-base lg:text-lg font-bold text-center font-serif text-color-default hover:no-underline hover:text-gray-400 md:flex md:py-0;
+  }
+
+  a.anchor {
+    @apply text-secondary-400;
+  }
+
+  button.submit-form {
+    @apply border border-secondary-600 bg-secondary-600 text-white rounded-md px-4 py-2 my-2 select-none hover:bg-secondary-700 focus:outline-none;
+  }
+
+  .required {
+    @apply after:content-['*'] after:ml-0.5 after:text-secondary-400;
+  }
+}
+
+@layer utilities {
+  .text-color-default {
+    color: #6e6e6e;
+  }
+
+  .text-gray-950 {
+    color: #030712;
+  }
+
+  .bg-primary\/80 {
+    background-color: rgba(0, 102, 51, 0.8);
+  }
+
+  .bg-primary\/85 {
+    background-color: rgba(0, 102, 51, 0.85);
+  }
+
+  .bg-primary\/90 {
+    background-color: rgba(0, 102, 51, 0.9);
+  }
+
+  .bg-gray-950 {
+    background-color: #030712;
+  }
+
+  .bg-gray\/80 {
+    background-color: #030712cc;
+  }
+
+  .bg-gray\/85 {
+    background-color: #030712d9;
+  }
+
+  .bg-gray\/90 {
+    background-color: #030712e6;
+  }
+
+  .mh-fill {
+    @apply min-h-[-webkit-fill-available];
+  }
+
+  .mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .mb-64 {
+    margin-bottom: 16rem;
+  }
+
+  .mb-80 {
+    margin-bottom: 20rem;
+  }
+
+  .mt-8 {
+    margin-top: 2rem;
+  }
+
+  .mt-12 {
+    margin-top: 3rem;
+  }
+
+  .mt-16 {
+    margin-top: 4rem;
+  }
+
+  .pt-20 {
+    padding-top: 5rem;
+  }
+
+  .pt-24 {
+    padding-top: 6rem;
+  }
+
+  .pt-28 {
+    padding-top: 7rem;
+  }
+
+  .pt-32 {
+    padding-top: 8rem;
+  }
+
+  .min-h-screen-60 {
+    min-height: 60vh;
+  }
+
+  .min-h-screen-80 {
+    min-height: 80vh;
+  }
+
+  .max-h-screen-80 {
+    max-height: 80vh;
+  }
+
+  .h-screen-80 {
+    height: 80vh;
+  }
+}

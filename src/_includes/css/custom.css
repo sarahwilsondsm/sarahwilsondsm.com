@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'Source Serif Pro';
+    font-display: swap;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    src: url(/font/SourceSerifPro-Regular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Serif Pro';
+    font-display: swap;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 700;
+    src: url(/font/SourceSerifPro-Bold.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-display: swap;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 400;
+    src: url(/font/SourceSansPro-Regular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-display: swap;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 700;
+    src: url(/font/SourceSansPro-Bold.woff2) format('woff2');
+}
+
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    height: -webkit-fill-available;
+}
+
+body {
+    height: -webkit-fill-available;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    word-wrap: normal;
+}
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+    position: static !important;
+    overflow: visible;
+    clip: auto;
+    width: auto;
+    height: auto;
+}
+
+nav#header {
+    @apply mt-12 mb-8;
+}
+
+.isFront nav#header {
+    @apply mb-64;
+}
+
+#menuHeader a {
+    @apply absolute;
+}
+
+#menuHeader a img {
+    width: 6rem;
+}
+
+/* Responsive navigation */
+.hamburger {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+}
+
+.hamburger__top-bun,
+.hamburger__bottom-bun {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: theme('colors.white');
+    transform: rotate(0);
+}
+
+.hamburger:hover [class*="-bun"] {
+    background: theme('colors.white');
+}
+
+.hamburger__top-bun {
+    transform: translateY(-5px);
+}
+
+.hamburger__bottom-bun {
+    transform: translateY(3px);
+}
+
+.open {
+    transform: rotate(90deg);
+    transform: translateY(-1px);
+}
+
+.open .hamburger__top-bun {
+    transform: rotate(45deg) translateY(0px);
+}
+
+.open .hamburger__bottom-bun {
+    transform: rotate(-45deg) translateY(0px);
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.grecaptcha-badge {
+    visibility: hidden;
+}
+
+/* small and larger */
+@media screen(sm) {
+    #menuHeader a {
+        left: .8rem;
+    }
+
+    #menuHeader a img {
+        width: 7.5rem;
+    }
+
+    nav#header {
+        margin-left: 8.5rem;
+        height: 3.5rem;
+        max-width: calc(100vw-120px);
+    }
+}
+
+/* medium and larger */
+@media screen(md) {
+    nav#header {
+        margin-left: 9.5rem;
+    }
+}
