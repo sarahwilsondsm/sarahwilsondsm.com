@@ -14,9 +14,8 @@
   </div>
   <div id="menu"
     class="fixed inset-0 flex-col items-center self-end justify-center hidden h-full py-6 sm:relative sm:w-auto sm:self-center sm:flex sm:flex-row sm:py-0 bg-white/95">
-    <a class="nav" href="/">Home</a>
-    {% for link in contentful.menulinks %}
-      <a class="nav" href="{{ link | slugify }}">{{ link }}</a></li>
+    {% for link in contentful.menuLinks %}
+      <a class="nav" href="{{ link.slug }}">{{ link.title }}</a></li>
     {% endfor %}
   </div>
   <div></div>

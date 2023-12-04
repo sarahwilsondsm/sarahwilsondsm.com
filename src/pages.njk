@@ -1,11 +1,12 @@
 ---
+layout: page.njk
+date: Last Modified
 pagination:
-    data: contentful.pages
+    data: contentful.extraPages
     size: 1
     alias: pg
     addAllPagesToCollections: true
 permalink: "/{{ pg.slug | slugify if pg.slug else pg.title | slugify }}.html"
-layout: page.njk
 eleventyComputed:
   title: "{{ pg.title }}"
 ---
