@@ -18,6 +18,6 @@ module.exports = {
   environment,
   isProd,
   url,
-  recaptchaSiteKey: "",
+  recaptchaSiteKey: "6Lc4UiYpAAAAAE0raenISniTbdcc44Ajh20ZtW3E",
   pkgVersion: pkg.version,
 };

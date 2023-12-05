@@ -1,2 +1,42 @@
 <script>
+  function navToggle() {
+    var body = document.getElementById('top');
+    var header = document.getElementById('menuHeader');
+    var btn = document.getElementById('menuBtn');
+    var nav = document.getElementById('menu');
+    if (btn.classList.contains('open')) {
+      nav.removeEventListener("click", navToggle);
+      btn.ariaLabel = 'Show Menu';
+    } else {
+      nav.addEventListener("click", navToggle, { once: true });
+      btn.ariaLabel = 'Hide  Menu';
+    }
+    body.classList.toggle('overflow-y-hidden');
+    header.classList.toggle('z-20');
+    btn.classList.toggle('open');
+    nav.classList.toggle('flex');
+    nav.classList.toggle('hidden');
+
+    var burgers = btn.querySelectorAll('span');
+    burgers[0].classList.toggle('right-5');
+    burgers[1].classList.toggle('right-5');
+    burgers[0].classList.toggle('right-1');
+    burgers[1].classList.toggle('right-1');
+  }
+
+  window.validEmail = function (email) {
+    return !Boolean(email) || /^\S+@\S+\.[a-zA-Z]{2,6}$/.test(email);
+  }
+
+  window.validPhone = function (phone) {
+    return !Boolean(phone) || /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone);
+  }
+
+  window.phoneOrEmailExists = function (form) {
+    return validateNotEmpty(form.email) || validateNotEmpty(form.phone);
+  }
+
+  window.validateNotEmpty = function (field) {
+    return typeof field.value !== 'undefined' && field.value.length !== 0;
+  }
 </script>

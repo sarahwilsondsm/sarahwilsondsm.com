@@ -90,12 +90,12 @@ nav#header {
     position: absolute;
     width: 24px;
     height: 2px;
-    background: theme('colors.white');
+    background: #6e6e6e;
     transform: rotate(0);
 }
 
 .hamburger:hover [class*="-bun"] {
-    background: theme('colors.white');
+    background: #6e6e6e;
 }
 
 .hamburger__top-bun {
