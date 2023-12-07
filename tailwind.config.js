@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
-  content: ["./src/**/*.{html,njk,md}", "./src/**/*.11ty.js", "./src/_data/plaiceholder.js"],
+  content: [".eleventy.js", "./src/**/*.{html,njk,md}", "./src/**/*.11ty.js", "./src/_data/plaiceholder.js"],
   theme: {
     colors: {
       transparent: "transparent",

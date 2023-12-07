@@ -62,7 +62,7 @@ body {
 }
 
 nav#header {
-    @apply mt-12 mb-8;
+    margin: 0 auto;
 }
 
 .isFront nav#header {
@@ -138,15 +138,7 @@ nav#header {
     }
 
     nav#header {
-        margin-left: 8.5rem;
         height: 3.5rem;
         max-width: calc(100vw-120px);
-    }
-}
-
-/* medium and larger */
-@media screen(md) {
-    nav#header {
-        margin-left: 9.5rem;
     }
 }

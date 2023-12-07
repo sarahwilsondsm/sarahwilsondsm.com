@@ -18,12 +18,10 @@ module.exports = async function () {
   }
 
   const pages = await getPages();
-  const menuLinks = [{ title: "Home", slug: "/" }].concat(
-    (await getMenuLinks()).map((link) => ({
-      title: link,
-      slug: slugify(link),
-    }))
-  );
+  const menuLinks = (await getMenuLinks()).map(({ title, slug }) => ({
+    title,
+    slug,
+  }));
 
   const menuSlugs = menuLinks.map((_) => _.slug);
   const menuTitles = menuLinks.map((_) => _.title);
@@ -67,7 +65,7 @@ async function getPages() {
 
 /**
  *
- * @returns {Promise<string[]>}
+ * @returns {Promise<{title: string, slug: string}[]>}
  */
 async function getMenuLinks() {
   try {
