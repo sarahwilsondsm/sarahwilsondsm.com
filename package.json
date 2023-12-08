@@ -9,7 +9,7 @@
     "start": "npm run serve",
     "prebuild": "npm run clean",
     "build": "cross-env ELEVENTY_ENV=dev npx eleventy",
-    "build:prod": "del-cli public/ .cache/ && npx eleventy --pathprefix=sarahwilson.com",
+    "build:prod": "del-cli public/ .cache/ && npx eleventy",
     "debug": "cross-env DEBUG=* npx eleventy"
   },
   "keywords": [],

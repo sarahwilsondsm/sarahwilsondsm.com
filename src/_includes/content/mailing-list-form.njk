@@ -1,0 +1,50 @@
+{% import "../macros/forms.njk" as forms %}
+
+{% call forms.form(
+  'mailing-list-form',
+  'https://contact.sarahwilsondsm.com/contact?form=Sarah%20Wilson%20DSM%20Website%20-%20Mailing%20List%20Form',
+  '{
+    form: {
+      firstName: { value: "", validate: function (form) { return validateNotEmpty(form.firstName) } },
+      lastName:  { value: "", validate: function (form) { return validateNotEmpty(form.lastName) } },
+      email:     { value: "", validate: function (form) { return validEmail(form.email) } },
+      errors: false,
+      submitCount: 0
+    }
+  }',
+  onError='null'
+) %}
+  {{ forms.field(
+    'First name',
+    name='first-name',
+    model='form.firstName',
+    labelClass='required',
+    emptyText='Please provide your first name'
+  ) }}
+
+  {{ forms.field(
+    'Last name',
+    name='last-name',
+    model='form.lastName',
+    labelClass='required',
+    emptyText='Please provide your last name'
+  ) }}
+
+  {{ forms.field(
+    'Email address',
+    name='email-address',
+    model='form.email',
+    labelClass='required',
+    placeholder='name@example.com',
+    emptyText='Please provide your email address',
+    invalidText='Please provide a valid email address. For example: name@example.com'
+  ) }}
+
+  {{ forms.recaptchaDisclaimer() }}
+  <button class="submit-form"
+          type="button"
+          @click="form.submitCount += 1"
+  >Send</button>
+{% endcall %}
+
+{{ forms.recaptchaScript(recaptchaSiteKey, 'mailing-list-form') }}

@@ -1,0 +1,61 @@
+{% import "../macros/forms.njk" as forms %}
+
+{% call forms.form(
+  'contact-form',
+  'https://contact.sarahwilsondsm.com/contact?form=Sarah%20Wilson%20DSM%20Website%20-%20Contact%20Form',
+  '{
+    form: {
+      name:   { value: "", validate: function (form) { return validateNotEmpty(form.name) } },
+      email:  { value: "", validate: function (form) { return validEmail(form.email) } },
+      phone:  { value: "", validate: function (form) { return validPhone(form.phone) } },
+      msg:    { value: "", validate: function (form) { return validateNotEmpty(form.msg) } },
+      errors: false,
+      submitCount: 0
+    }
+  }'
+) %}
+  {{ forms.field(
+    'Name',
+    name='name',
+    model='form.name',
+    labelClass='required',
+    emptyText='Please provide your name'
+  ) }}
+
+  {{ forms.field(
+    'Email address',
+    name='email-address',
+    model='form.email',
+    labelClass='required',
+    placeholder='name@example.com',
+    emptyText='Please provide your email address',
+    invalidText='Please provide a valid email address. For example: name@example.com'
+  ) }}
+
+  {{ forms.field(
+    'Phone number',
+    name='phone-number',
+    model='form.phone',
+    labelClass='required',
+    placeholder='515-123-1234',
+    emptyText='Please provide your phone number',
+    invalidText='Please provide a valid phone number. For example: 515-111-2222'
+  ) }}
+
+  {{ forms.field(
+    'Message',
+    name='message',
+    model='form.msg',
+    type='textarea',
+    labelClass='required',
+    emptyText='Please provide a message'
+  ) }}
+
+  {{ forms.recaptchaDisclaimer() }}
+  <button class="submit-form"
+          type="button"
+          @click="form.submitCount += 1"
+  >Send</button>
+{% endcall %}
+
+{{ forms.recaptchaScript(recaptchaSiteKey, 'contact-form') }}

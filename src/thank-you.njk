@@ -1,0 +1,17 @@
+---
+layout: page.njk
+date: Last Modified
+title: Thank you
+permalink: thank-you.html
+ignore: true
+---
+
+<div class="w-5/6 px-4 pb-16 m-auto md:w-3/4 lg:w-2/3 xl:w-1/2">
+   <h1 class="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-widest text-gray-800">
+      Thank you!
+   </h1>
+   <p class="text-center py-8"
+      x-data
+      x-text="decodeURIComponent(window.location.search).endsWith('Contact Form') ? 'We have received your message. We will respond as soon as we can!' : 'Thank you for registering!'">
+   </p>
+</div>

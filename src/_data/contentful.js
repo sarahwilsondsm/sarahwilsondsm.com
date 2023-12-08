@@ -27,10 +27,7 @@ module.exports = async function () {
   const menuTitles = menuLinks.map((_) => _.title);
 
   const contentful = {
-    extraPages: Object.values(pages).filter(
-      ({ slug, title }) =>
-        !menuTitles.includes(title) && !menuSlugs.includes(slugify(slug))
-    ),
+    extraPages: determineContentfulOnlyPages(pages, menuTitles, menuSlugs),
     menuLinks,
     pages,
   };
@@ -80,4 +77,21 @@ async function getMenuLinks() {
   } catch (e) {
     console.error("Error trying to retrieve contentful menuLinks", e);
   }
+}
+
+/**
+ * These pages do not have a file already in the code base and will be generated using a template.
+ *
+ * @param {{[x: string]: Page}[]} pages
+ * @param {string[]} menuTitles
+ * @param {string[]} menuSlugs
+ * @returns {{[x: string]: Page}[]}
+ */
+function determineContentfulOnlyPages(pages, menuTitles, menuSlugs) {
+  return Object.values(pages)
+    .filter(({ slug }) => !["Contact"].includes(slug))
+    .filter(
+      ({ slug, title }) =>
+        !menuTitles.includes(title) && !menuSlugs.includes(slugify(slug))
+    );
 }

@@ -44,7 +44,7 @@
   }
 
   a.anchor {
-    @apply text-secondary-400;
+    @apply text-secondary-700;
   }
 
   button.submit-form {
@@ -52,7 +52,7 @@
   }
 
   .required {
-    @apply after:content-['*'] after:ml-0.5 after:text-secondary-400;
+    @apply after:content-['*'] after:ml-0.5 after:text-[#ee3b2b];
   }
 }
 

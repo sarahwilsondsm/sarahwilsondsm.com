@@ -6,7 +6,7 @@ pagination:
     size: 1
     alias: pg
     addAllPagesToCollections: true
-permalink: "/{{ pg.slug | slugify if pg.slug else pg.title | slugify }}.html"
 eleventyComputed:
+  permalink: "/{{ pg.slug | slugify if pg.slug else pg.title | slugify }}.html"
   title: "{{ pg.title }}"
 ---

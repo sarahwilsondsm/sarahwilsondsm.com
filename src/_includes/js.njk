@@ -25,18 +25,14 @@
   }
 
   window.validEmail = function (email) {
-    return !Boolean(email) || /^\S+@\S+\.[a-zA-Z]{2,6}$/.test(email);
+    return Boolean(email.value) && /^\S+@\S+\.[a-zA-Z]{2,6}$/.test(email.value);
   }
 
   window.validPhone = function (phone) {
-    return !Boolean(phone) || /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone);
-  }
-
-  window.phoneOrEmailExists = function (form) {
-    return validateNotEmpty(form.email) || validateNotEmpty(form.phone);
+    return Boolean(phone.value) && /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(phone.value);
   }
 
   window.validateNotEmpty = function (field) {
-    return typeof field.value !== 'undefined' && field.value.length !== 0;
+    return typeof field.value === 'string' && field.value.trim().length !== 0;
   }
 </script>

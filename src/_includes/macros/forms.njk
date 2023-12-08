@@ -1,0 +1,125 @@
+{% macro form(name, action, xData, method='post', onError='window.scrollTo(0,0)') %}
+  <form name="{{ name }}"
+        id="form"
+        action="{{ action }}"
+        method="{{ method }}"
+        x-data="{{ xData }}"
+        x-init="$watch('form.submitCount', () => { form.errors = Object.keys(form).some(k => Boolean(form[k].validate) && !form[k].validate(form)); form.errors ? {{ onError }} : submitContactForm() })">
+    <p x-cloak class="text-[#ee3b2b] mb-6" x-show="form.errors">Please correct the errors below before submitting</p>
+    <p class="required mb-4">Required</p>
+    <input class="hidden" name="recaptchaToken" value="">
+    {{ caller() }}
+  </form>
+{% endmacro %}
+
+{% macro init(model, validate, ifValid, ifInvalid) %}
+  {{ validate }} && $watch('{{ model }}.value', () => {{ model }}.validate(form) ? {{ ifValid }} : {{ ifInvalid }}); {{ validate }} && $watch('form.submitCount', () => {{ model }}.validate(form) ? {{ ifValid }} : {{ ifInvalid }});
+{% endmacro %}
+
+{% macro button(text, name, type='submit', class='') %}
+  <button name="{{ name }}" type="{{ type }}"
+          class="border border-primary-500 bg-primary-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-primary-600 focus:outline-none focus:shadow-outline {{ class }}"
+  >{{ text }}</button>
+{% endmacro %}
+
+{% macro input(name, value='', type='text', placeholder='', class='w-full', rows='4', model='', validate=true) %}
+  {% if type === 'textarea' %}
+    <textarea name="{{ name }}" id="{{ name }}"
+              value="{{ value | escape }}"
+              class="peer block w-full rounded-md border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm {{ class }}"
+              placeholder="{{ placeholder }}"
+              rows="{{ rows }}"
+              x-model.lazy="{{ model }}.value"
+              x-init="{{ init(model, validate, '$el.setCustomValidity(``)', '$el.setCustomValidity(`Invalid field`)') }}">
+    ></textarea>
+  {% else %}
+    <input type="{{ type }}"
+           name="{{ name }}"
+           id="{{ name }}"
+           value="{{ value | escape }}"
+           class="peer block rounded-md border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm {{ class }}"
+           placeholder="{{ placeholder }}"
+           x-model.lazy="{{ model }}.value"
+           x-init="{{ init(model, validate, '$el.setCustomValidity(``)', '$el.setCustomValidity(`Invalid field`)') }}">
+  {% endif %}
+{% endmacro %}
+
+{% macro fieldset(legend, items, legendClass='', validate=true, type='checkbox', name='', model='', emptyText='') %}
+  <fieldset class="sm:grid sm:grid-cols-2">
+    <legend class="mb-4 {{ legendClass }}">{{ legend }}</legend>
+    {% for item in items %}
+      <div class="mb-2">
+        <input type="{{ type }}" value="{{ item }}" name="{{ name }}" id="{{ name }}_{{ loop.index }}"
+               class="border-gray-300 focus:ring-3 focus:ring-primary-300 rounded mr-2"
+               x-model.lazy="{{ model }}.value">
+        <label for="{{ name }}_{{ loop.index }}">{{ item }}</label>
+      </div>
+    {% endfor %}
+  </fieldset>
+  {% if validate %}
+    <p class="text-secondary-600 text-sm mb-2 invisible error-label"
+        x-init="{{ init(model, validate, '$el.classList.add(`invisible`)', '$el.classList.remove(`invisible`)') }}">
+      {{ emptyText or "&nbsp;" | safe }}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+{% macro label(text, forHtml, class='') %}
+  <label for="{{ forHtml }}" class="{{ class }}">{{ text }}</label>
+{% endmacro %}
+
+{% macro field(
+  text,
+  name,
+  value='',
+  type='text',
+  placeholder='',
+  inputClass='',
+  rows='4',
+  model='',
+  labelClass='',
+  validate=true,
+  emptyText='&nbsp;',
+  invalidText='&nbsp;'
+) %}
+  <div>
+    {% if text %}
+      {{ label(text, name, labelClass) }}
+    {% endif %}
+    {{ input(name, value, type, placeholder, inputClass, rows, model, validate) }}
+    {% if validate %}
+      {{ error(model, emptyText, invalidText) }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro error(model, emptyText, invalidText) %}
+  <p
+    class="error-label text-[#ee3b2b] text-sm invisible peer-invalid:visible mb-2"
+    x-data x-text="{{ model }}.value.length ? '{{ invalidText | safe }}' : '{{ emptyText | safe }}'">
+    &nbsp;
+  </p>
+{% endmacro %}
+
+{% macro recaptchaScript(siteKey, formName) %}
+  <script async src="https://www.google.com/recaptcha/api.js?render={{ siteKey }}"></script>
+
+  <script>
+    function submitContactForm() {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('{{ siteKey }}', { action: 'submit' }).then(function(token) {
+          document.querySelector('input[name="recaptchaToken"]').value = token;
+          document.querySelector('form[name="{{ formName }}"]').submit();
+        });
+      });
+    }
+  </script>
+{% endmacro %}
+
+{% macro recaptchaDisclaimer() %}
+  <p class="text-sm font-light mb-4">
+    This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy" class="anchor">Privacy Policy</a> and
+    <a href="https://policies.google.com/terms" class="anchor">Terms of Service</a> apply.
+  </p>
+{% endmacro %}
