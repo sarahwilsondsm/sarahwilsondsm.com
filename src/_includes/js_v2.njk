@@ -5,15 +5,14 @@
     var btn = document.getElementById('menuBtn');
     var nav = document.getElementById('menu');
     if (btn.classList.contains('open')) {
-      nav.removeEventListener("click", navToggle);
       btn.ariaLabel = 'Show Menu';
     } else {
-      nav.addEventListener("click", navToggle, { once: true });
       btn.ariaLabel = 'Hide Menu';
     }
     body.classList.toggle('overflow-y-hidden');
     header.classList.toggle('z-20');
     btn.classList.toggle('open');
+    btn.parentNode.classList.toggle('z-1');
     nav.classList.toggle('flex');
     nav.classList.toggle('hidden');
 
