@@ -36,11 +36,11 @@
 
 @layer components {
   header {
-    @apply w-full flex flex-col overflow-hidden;
+    @apply w-full flex flex-col;
   }
 
-  a.nav {
-    @apply w-auto px-3 py-3 sm:text-sm md:text-base lg:text-lg font-bold text-center font-serif text-color-default hover:no-underline hover:text-gray-400 md:flex md:py-0;
+  a.nav, button.nav {
+    @apply w-auto px-3 py-3 sm:text-size-sm sm:leading-6 md:text-base lg:text-lg font-bold text-center font-serif text-color-default hover:no-underline hover:text-gray-400 sm:flex sm:py-0;
   }
 
   a.anchor {

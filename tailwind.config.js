@@ -2,7 +2,12 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
-  content: [".eleventy.js", "./src/**/*.{html,njk,md}", "./src/**/*.11ty.js", "./src/_data/plaiceholder.js"],
+  content: [
+    ".eleventy.js",
+    "./src/**/*.{html,njk,md}",
+    "./src/**/*.11ty.js",
+    "./src/_data/plaiceholder.js",
+  ],
   theme: {
     colors: {
       transparent: "transparent",
@@ -50,6 +55,11 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
+    },
+    extend: {
+      fontSize: {
+        "size-sm": ".875rem",
+      },
     },
     fontFamily: {
       sans: ["Source Sans Pro", "Arial", "Helvetica", "sans-serif"],

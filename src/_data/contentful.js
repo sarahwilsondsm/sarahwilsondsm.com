@@ -18,13 +18,18 @@ module.exports = async function () {
   }
 
   const pages = await getPages();
-  const menuLinks = (await getMenuLinks()).map(({ title, slug }) => ({
-    title,
-    slug,
+  const menuLinks = (await getMenuLinks()).map((ml) => ({
+    ...ml,
+    ...maybeSlugify(ml),
+    children: ml.children?.map(maybeSlugify).map(({ slug, title }) => ({
+      title,
+      url: (ml.parentSlug ?? "") + slug,
+    })),
   }));
 
-  const menuSlugs = menuLinks.map((_) => _.slug);
-  const menuTitles = menuLinks.map((_) => _.title);
+  const allMenuLinks = menuLinks.flatMap((_) => _.children ?? _);
+  const menuSlugs = allMenuLinks.map((_) => _.slug);
+  const menuTitles = allMenuLinks.map((_) => _.title);
 
   const contentful = {
     extraPages: determineContentfulOnlyPages(pages, menuTitles, menuSlugs),
@@ -61,8 +66,22 @@ async function getPages() {
 }
 
 /**
+ * These pages do not have a file already in the code base and will be generated using a template.
  *
- * @returns {Promise<{title: string, slug: string}[]>}
+ * @param {{title: string, slug?: string}} menuLink
+ */
+function maybeSlugify(menuLink) {
+  return {
+    title: menuLink.title,
+    slug: !(menuLink.parentSlug || menuLink.slug)
+      ? `/${slugify(menuLink.title)}`
+      : menuLink.slug,
+  };
+}
+
+/**
+ *
+ * @returns {Promise<{title: string, slug?: string, parentSlug?: string, children: [{title: string, slug?: string}]}[]>}
  */
 async function getMenuLinks() {
   try {
@@ -92,6 +111,6 @@ function determineContentfulOnlyPages(pages, menuTitles, menuSlugs) {
     .filter(({ slug }) => !["Contact"].includes(slug))
     .filter(
       ({ slug, title }) =>
-        !menuTitles.includes(title) && !menuSlugs.includes(slugify(slug))
+        !menuTitles.includes(title) && !menuSlugs.includes(`/${slugify(slug)}`)
     );
 }

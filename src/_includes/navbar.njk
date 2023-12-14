@@ -1,5 +1,5 @@
 <nav id="header"
-  class="flex flex-col items-center w-full px-4 sm:h-16 bg-white shadow-none md:justify-between md:flex-row sm:px-6 py-2 sm:py-0">
+  class="w-full px-4 sm:h-16 bg-white shadow-none md:justify-between md:flex-row sm:px-6 py-2 sm:py-0">
   <div id="menuHeader"
     class="flex flex-row flex-no-wrap items-center self-start justify-between w-full sm:w-auto sm:self-center sm:flex-none">
     <div class="do-not-delete"></div>
@@ -13,9 +13,27 @@
     </div>
   </div>
   <div id="menu"
-    class="fixed inset-0 flex-col items-center self-end justify-center hidden h-full py-6 sm:relative sm:w-auto sm:self-center sm:flex sm:flex-row sm:py-0 bg-white/95">
+    class="fixed inset-0 items-center justify-center hidden flex-col h-full py-6 sm:relative sm:w-auto sm:flex sm:self-center sm:flex-row sm:py-0 bg-white/95">
     {% for link in contentful.menuLinks %}
-      <a class="nav" href="{{ link.slug }}">{{ link.title }}</a>
+      {% if link.slug %}
+        <a class="nav" href="{{ link.slug }}">{{ link.title }}</a>
+      {% else %}
+        <div x-data="{ open: false }">
+          <button class="nav"
+             x-on:click="open = !open"
+             x-on:keydown.escape="open = false">{{ link.title }}
+            <i class="inline-block align-middle"><svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"></path></svg></i>
+          </button>
+          <ul x-cloak x-show="open" x-on:click.away="open = false"
+              class="absolute font-normal bg-white shadow rounded w-48 border mt-2 py-1 z-[1]">
+            {% for child in link.children %}
+              <li class="block sm:flex">
+                <a class="nav" href="{{ child.url }}">{{ child.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     {% endfor %}
   </div>
   <div></div>
