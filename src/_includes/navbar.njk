@@ -4,8 +4,8 @@
     class="flex flex-row flex-no-wrap items-center self-start justify-between w-full sm:w-auto sm:self-center sm:flex-none">
     <div class="do-not-delete"></div>
     <div>
-      <button id="menuBtn" class="block hamburger sm:hidden focus:outline-none bg-white pt-3" type="button" onclick="navToggle();"
-        aria-label="Show Menu">
+      <button id="menuBtn" class="block hamburger sm:hidden focus:outline-none bg-white pt-3"
+              type="button" onclick="navToggle();" aria-label="Show Menu">
         <span class="hamburger__top-bun right-5"></span>
         <span class="hamburger__bottom-bun right-5"></span>
         <span class="block text-right text-color-default text-sm font-light mt-2">Menu</span>
@@ -13,19 +13,19 @@
     </div>
   </div>
   <div id="menu"
-    class="fixed inset-0 items-center justify-center hidden flex-col h-full py-6 sm:relative sm:w-auto sm:flex sm:self-center sm:flex-row sm:py-0 bg-white/95">
+    class="fixed inset-0 items-center hidden flex-col h-full py-6 sm:justify-center sm:relative sm:w-auto sm:flex sm:self-center sm:flex-row sm:py-0 bg-white/95">
     {% for link in contentful.menuLinks %}
       {% if link.slug %}
-        <a class="nav" href="{{ link.slug }}">{{ link.title }}</a>
+        <a class="nav min-w-[12rem] sm:min-w-[1rem]" href="{{ link.slug }}">{{ link.title }}</a>
       {% else %}
-        <div x-data="{ open: false }">
-          <button class="nav"
+        <div class="min-w-[12rem] sm:min-w-[1rem]" x-data="{ open: false }">
+          <button class="nav min-w-[12rem] sm:min-w-[1rem]"
              x-on:click="open = !open"
              x-on:keydown.escape="open = false">{{ link.title }}
             <i class="inline-block align-middle"><svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"></path></svg></i>
           </button>
           <ul x-cloak x-show="open" x-on:click.away="open = false"
-              class="absolute font-normal bg-white shadow rounded w-48 border mt-2 py-1 z-[1]">
+              class="font-normal bg-[#f8f4f2] text-center shadow-2xl border border-primary-100 rounded py-1 rounded-t-none sm:mt-2 sm:text-left sm:absolute sm:w-40 sm:z-[1]">
             {% for child in link.children %}
               <li class="block sm:flex">
                 <a class="nav" href="{{ child.url }}">{{ child.title }}</a>
