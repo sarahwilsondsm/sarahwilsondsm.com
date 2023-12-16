@@ -2,7 +2,7 @@ const pkg = require("../../package.json");
 const environment = process.env.ELEVENTY_ENV;
 const DEV_ENV = "dev";
 const devUrl = "http://localhost:8080";
-const prodUrl = "https://www.sarahwilsondsm.org";
+const prodUrl = "https://www.sarahwilsondsm.com";
 
 let isProd = false;
 let url;
