@@ -1,6 +1,10 @@
 const { AssetCache } = require("@11ty/eleventy-fetch");
 const slugify = require("@sindresorhus/slugify");
+
+const { BLOCKS } = require("@contentful/rich-text-types");
+const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const contentful = require("contentful");
+
 const client = contentful.createClient({
   space: process.env.CTFL_SPACE,
   accessToken: process.env.CTFL_ACCESSTOKEN,
@@ -36,6 +40,14 @@ module.exports = async function () {
   return contentful;
 };
 
+const paragraphClass = "mb-6";
+const contentfulOptions = {
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node, next) =>
+      `<p class="${paragraphClass}">${next(node.content)}</p>`,
+  },
+};
+
 /**
  *
  * @returns {Promise<{[x: string]: Page>}}
@@ -46,10 +58,25 @@ async function getPages() {
       content_type: "page",
       order: "sys.createdAt",
     });
-    const pages = response.items.reduce(function (acc, page) {
-      acc[slugify(page.fields.slug)] = {
-        ...page.fields,
-        date: new Date(page.sys.updatedAt),
+    const pages = response.items.reduce(function (acc, { sys, fields }) {
+      if (fields.paragraph1) {
+        const paragraph1 = documentToHtmlString(
+          fields.paragraph1,
+          contentfulOptions
+        );
+        const description = decodeURIComponent(paragraph1
+          .replace(new RegExp(`<p class="${paragraphClass}">|<\/p>`, 'g'), "")
+          .replace(new RegExp('&#39;', 'g'), "'")
+          .substring(0, 160));
+        fields = {
+          ...fields,
+          paragraph1,
+          description,
+        };
+      }
+      acc[slugify(fields.slug)] = {
+        ...fields,
+        date: new Date(sys.updatedAt),
       };
       return acc;
     }, {});

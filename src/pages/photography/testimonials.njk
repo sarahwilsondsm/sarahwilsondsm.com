@@ -3,5 +3,6 @@ layout: page.njk
 date: Last Modified
 permalink: /photography/testimonials.html
 eleventyComputed:
-  title: "{{ contentful.pages.testimonials.title }}"
+  description: "{{ contentful.pages.testimonials.description | safe }}"
+  title: "{{ contentful.pages.testimonials.title | safe }}"
 ---

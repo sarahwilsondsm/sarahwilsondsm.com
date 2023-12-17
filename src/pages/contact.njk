@@ -3,6 +3,7 @@ layout: page.njk
 date: Last Modified
 permalink: contact.html
 eleventyComputed:
+  description: "{{ contentful.pages.contact.description | safe }}"
   title: "{{ contentful.pages.contact.title | safe }}"
 mainClass: bg-primary-50
 ---
@@ -10,6 +11,6 @@ mainClass: bg-primary-50
   <h1 class="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-widest text-gray-800">
     {{ contentful.pages.contact.heading1 | safe }}
   </h1>
-  {% documentToHtmlString contentful.pages.contact.paragraph1 %}
+  {{ contentful.pages.contact.paragraph1 | safe }}
   {% renderFile "./src/_includes/content/contact-us-form.njk", env %}
 </div>

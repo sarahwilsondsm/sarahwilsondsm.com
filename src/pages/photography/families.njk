@@ -3,6 +3,7 @@ layout: page.njk
 date: Last Modified
 permalink: /photography/families.html
 eleventyComputed:
+  description: "{{ contentful.pages.families.description | safe }}"
   title: "{{ contentful.pages.families.title | safe }}"
 ---
 <div class="w-full px-4 m-auto lg:w-11/12 xl:w-5/6 md:grid md:grid-cols-12 md:gap-10 lg:gap-12">
@@ -16,6 +17,6 @@ eleventyComputed:
     <h1 class="hidden sm:block text-2xl sm:text-3xl lg:text-4xl font-medium tracking-widest text-gray-800">
       {{ contentful.pages.families.heading1 | safe }}
     </h1>
-    {% documentToHtmlString contentful.pages.families.paragraph1 %}
+    {{ contentful.pages.families.paragraph1 | safe }}
   </div>
 </div>

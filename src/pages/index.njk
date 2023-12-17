@@ -19,7 +19,7 @@ eleventyComputed:
   <h1 class="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-widest text-gray-800">
     {{ contentful.pages.home.heading1 | safe }}
   </h1>
-  {% documentToHtmlString contentful.pages.home.paragraph1 %}
+  {{ contentful.pages.home.paragraph1 | safe }}
 </div>
 <div class="bg-primary-50">
   <div class="w-5/6 px-4 pb-16 m-auto md:w-3/4 lg:w-2/3 xl:w-1/2 ">
