@@ -63,11 +63,13 @@ async function getPages() {
         const paragraph1 = documentToHtmlString(
           fields.paragraph1,
           contentfulOptions
+        ).replace(new RegExp("&lt;br\/?&gt;", "g"), "<br/>");
+        const description = decodeURIComponent(
+          paragraph1
+            .replace(new RegExp(`<p class="${paragraphClass}">|<\/p>`, "g"), "")
+            .replace(new RegExp("&#39;", "g"), "'")
+            .substring(0, 160)
         );
-        const description = decodeURIComponent(paragraph1
-          .replace(new RegExp(`<p class="${paragraphClass}">|<\/p>`, 'g'), "")
-          .replace(new RegExp('&#39;', 'g'), "'")
-          .substring(0, 160));
         fields = {
           ...fields,
           paragraph1,
